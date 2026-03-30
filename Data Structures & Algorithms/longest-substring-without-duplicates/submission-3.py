@@ -1,0 +1,16 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        longest_substring = 0
+        left = 0
+        freq = {}
+
+        for right in range(len(s)):
+            freq[s[right]] = 1 + freq.get(s[right], 0)
+
+            while freq[s[right]] > 1:
+                freq[s[left]] -= 1
+                left += 1
+            
+            longest_substring = max(longest_substring, right - left + 1)
+        
+        return longest_substring
